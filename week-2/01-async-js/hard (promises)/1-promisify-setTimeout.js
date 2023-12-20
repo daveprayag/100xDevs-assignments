@@ -2,7 +2,15 @@
     Write a function that returns a promise that resolves after n seconds have passed, where n is passed as an argument to the function.
 */
 
-function wait(n) {
+function promisifiedSetTimeout(time) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, time);
+  });
 }
 
-module.exports = wait;
+function wait(n) {
+  promisifiedSetTimeout(n).then(() => {
+    console.log("Hello from promisifiedSetTimeout function");
+  });
+}
+wait(2000);
